@@ -33,7 +33,8 @@ public class Empresa implements Serializable {
 	
 	private String cnpj;
 	
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
+	@Column(name = "datafundacao")
 	private Date dataFundacao;
 	
 	//relação empresa e servico 
@@ -44,6 +45,7 @@ public class Empresa implements Serializable {
 
 	//Mapeando o ENUM 
 	@Enumerated(EnumType.STRING)
+	@Column(nullable = false , length = 30)
 	private TipoEmpresa tipo;
 	
 	
