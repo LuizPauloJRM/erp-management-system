@@ -8,6 +8,8 @@
   <description>ERP Management System</description>
   <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
 	</properties>
 
 	<dependencies>
@@ -107,6 +109,14 @@
 			<artifactId>postgresql</artifactId>
 			<version>42.7.4</version>
 			<scope>compile</scope>
+		</dependency>
+
+
+		<!--Persistence -->
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>javax.persistence-api</artifactId>
+			<version>2.2</version>
 		</dependency>
 
 	</dependencies>

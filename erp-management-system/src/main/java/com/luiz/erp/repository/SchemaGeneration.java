@@ -4,12 +4,13 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import com.luiz.erp.model.Empresa;
 
 public class SchemaGeneration {
 	public static void main(String[] args) {
-		EntityManagerFactory emf = Pesistence.createEntityManagerFactory("ERPmanagement");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("erpmanagement");
 		
 		EntityManager em = emf.createEntityManager();
 		
