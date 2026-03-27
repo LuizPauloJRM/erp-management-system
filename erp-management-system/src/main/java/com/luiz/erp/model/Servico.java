@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "servicos")
-public class Servicos implements Serializable{
+public class Servico implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	//tabela no banco servicos 
@@ -24,8 +25,8 @@ public class Servicos implements Serializable{
 	
 	@Column(nullable = false, length = 80)
 	private String descricao;
-	
-	
+
+
 	//Get e Set 
 	public long getId() {
 		return id;
@@ -59,7 +60,7 @@ public class Servicos implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Servicos other = (Servicos) obj;
+		Servico other = (Servico) obj;
 		return id == other.id;
 	}
 	

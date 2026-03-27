@@ -9,6 +9,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import com.luiz.erp.model.Servico;
+
 public class Servicos implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -19,21 +21,22 @@ public class Servicos implements Serializable{
 		
 	}
 	
+	//Construtor
 	public Servicos(EntityManager manager) {
 		this.manager  = manager;
 	}
 	
-	public List<Servicos> pesquisar (String descricao){
+	public List<Servico> pesquisar (String descricao){
 		//Classe Util que são usadas 
 		CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
 		
 		
-		CriteriaQuery<Servicos> criteriaQuery = criteriaBuilder.createQuery(Servicos.class);
-		Root<Servicos> root = criteriaQuery.from(Servicos.class);
+		CriteriaQuery<Servico> criteriaQuery = criteriaBuilder.createQuery(Servico.class);
+		Root<Servico> root = criteriaQuery.from(Servico.class);
 		criteriaQuery.select(root);
 		criteriaQuery.where(criteriaBuilder.like(root.get("descricao"),descricao +"%"));
 		
-		TypedQuery<Servicos> query = manager.createQuery(criteriaQuery);
+		TypedQuery<Servico> query = manager.createQuery(criteriaQuery);
 		
 		return query.getResultList();
 	}

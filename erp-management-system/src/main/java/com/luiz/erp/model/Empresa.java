@@ -31,6 +31,9 @@ public class Empresa implements Serializable {
 	@Column(name = "razaosocial")
 	private String razaoSocial;
 	
+	@Column(name = "nomefantasia")
+	private String nomeFantasia;
+	
 	private String cnpj;
 	
 	@Temporal(TemporalType.DATE)
@@ -41,12 +44,14 @@ public class Empresa implements Serializable {
 	//Muitas empresas para um serviço
 	@ManyToOne
 	@JoinColumn(name = "servicos_id")
-	private Servicos servicos;
+	private Servico servicos;
 
 	//Mapeando o ENUM 
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false , length = 30)
 	private TipoEmpresa tipo;
+	
+	
 	
 	
 	
@@ -81,12 +86,22 @@ public class Empresa implements Serializable {
 	public void setDataFundacao(Date dataFundacao) {
 		this.dataFundacao = dataFundacao;
 	}
+	
+	
 
-	public Servicos getServicos() {
+	public String getNomeFantasia() {
+		return nomeFantasia;
+	}
+
+	public void setNomeFantasia(String nomeFantasia) {
+		this.nomeFantasia = nomeFantasia;
+	}
+
+	public Servico getServicos() {
 		return servicos;
 	}
 
-	public void setServicos(Servicos servicos) {
+	public void setServicos(Servico servicos) {
 		this.servicos = servicos;
 	}
 

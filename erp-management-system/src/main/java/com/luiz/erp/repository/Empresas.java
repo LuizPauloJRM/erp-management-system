@@ -28,6 +28,7 @@ public class Empresas implements Serializable {
 	}
 	
 	//Pesquisa por empresa por nome, lista de empresa ,query
+	//Consulta de String passada por parametro 
 	public List<Empresa> pesquisar(String nome) {
 		String jpql="from Empresa where nomeFantasia like :nomeFantasia";
 		
