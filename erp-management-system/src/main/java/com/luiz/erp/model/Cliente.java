@@ -35,4 +35,7 @@ public class Cliente implements Serializable {
     private String inSexoMasc;
 
     // getters e setters
+    
+    
+    
 }
