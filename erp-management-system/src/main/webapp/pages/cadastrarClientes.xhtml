@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:panelGroup class="row" layout="block">
+		<h:panelGroup class="col-md-12" id="dadosCadastroCliente" layout="block">
+			<div class="panel-body">
+				<div class="form-horizontal">
+					<h:panelGroup class="col-md-12" id="dadosPrincipaisDoCliente" layout="block">
+					<div class="form-group form-group-sm" id="linha0">
+					<!-- Pessoa Física / Pessoa Juridica  -->
+					<label class="col-md-1 control-label">Tipo Pessoa:</label>
+					</div>
+					<div class="col-md-2">
+						<p:selectOneMenu accesskey="1" filter="true" id="TipoClinte"
+									styleClass="form-control"
+									value="#{cadastrarClienteAction.entidade.inPf}"
+									valueChangeListener="#{cadastrarClienteAction.mudancaCampo}">
+
+
+<!-- 								<f:selectItem itemLabel="#{label.tipoPessoaFisica}" itemValue="#{true}" /> -->
+<!-- 								<f:selectItem itemLabel="#{label.tipoPessoaJuridica}"itemValue="#{false}" /> -->
+
+
+<!-- 							<p:ajax event="change" execute="@this" -->
+<!-- 								listener="#{cadastrarClienteAction.atualizarSemSalvar()}" -->
+<!-- 								oncomplete="escondeDiv()" onstart="mostraDiv()" -->
+<!-- 								partialSubmit="true" process="TipoClinte" -->
+<!-- 								update="dadosPrincipaisDoCliente" /> -->
+
+<!-- 						</p:selectOneMenu> -->
+
+<!-- 							<p:tooltip for="TipoClinte" id="TipoClinteTooltip" position="top" -->
+<!-- 								value="#{tooltips.nome('cadastrarCliente.TipoClinte')}" /> -->
+						</div>
+						<label class="col-md-1 control-label">#{label.cpf}/#{label.identificacaoEmpresa}:
+							<p:commandLink onclick="PF('delConfirm').show();"
+								rendered="#{!cadastrarClienteAction.entidade.inPf}"
+								title="Buscar Dados do CNPJ" update="messages">
+								<i aria-hidden="true" class="fas fa-sync-alt" />
+             				</p:commandLink>
+
+						<p:dialog header="Confirmação" widgetVar="delConfirm">
+							<h:outputText
+								value="Você tem certeza que deseja buscar os dados desse CNPJ e atualizar o cadastro desse cliente?" />
+							<p:commandButton value="Confirmar"
+								action="#{cadastrarClienteAction.buscarCNPJ(cadastrarClienteAction.entidade.nrCnpj, cadastrarClienteAction.entidade)}"
+								oncomplete="escondeDiv();PF('delConfirm').hide();"
+								onstart="mostraDiv()"
+								update="messages dadosPrincipaisDoCliente, subTabCadastro" />
+							<p:commandButton value="Cancelar"
+								oncomplete="PF('delConfirm').hide();" />
+						</p:dialog>
+						</label>
+
+						<div class="col-md-2">
+							<p:inputText converter="#{JsfCPFConverter}" id="CPF"
+								label="CPF do Cliente" maxlength="14"
+								onkeypress="txtBoxFormatWithThis(this, '999.999.999-99', event)"
+								placeholder="#{placeholder.nome(view.viewId.replace('.xhtml','').replace('/','').concat('_CPF'))}"
+								rendered="#{cadastrarClienteAction.entidade.inPf and configuracoesRequestAction.configuracoes().cdPais != 'AO'}"
+								size="19" styleClass="form-control"
+								value="#{cadastrarClienteAction.entidade.nrCpf}"
+								valueChangeListener="#{cadastrarClienteAction.mudancaCampo}" />
+							<p:tooltip for="CPF" id="CPFToolTip" position="top"
+								value="#{tooltips.nome('cadastrarCliente.CPF')}" />
+							<p:inputText converter="#{JsfNIFConverter}" id="NIFI"
+								label="NIF Pessoal" maxlength="10"
+								placeholder="#{placeholder.nome(view.viewId.replace('.xhtml','').replace('/','').concat('_NIFI'))}"
+								rendered="#{cadastrarClienteAction.entidade.inPf and configuracoesRequestAction.configuracoes().cdPais == 'AO'}"
+								size="19" styleClass="form-control"
+								value="#{cadastrarClienteAction.entidade.nrCpf}"
+								valueChangeListener="#{cadastrarClienteAction.mudancaCampo}" />
+							<p:tooltip for="NIFI" id="NIFIToolTip" position="top"
+								value="#{tooltips.nome('NIFI')}" />
+							<p:inputText converter="#{JsfCNPJConverter}" id="CNPJ"
+								maxlength="18"
+								onkeypress="txtBoxFormatWithThis(this, '99.999.999/9999-99', event); if (event.keyCode == 13) { return false; }"
+								placeholder="#{placeholder.nome(view.viewId.replace('.xhtml','').replace('/','').concat('_CNPJ'))}"
+								rendered="#{!cadastrarClienteAction.entidade.inPf and configuracoesRequestAction.configuracoes().cdPais != 'AO'}"
+								size="16" styleClass="form-control"
+								value="#{cadastrarClienteAction.entidade.nrCnpj}"
+								valueChangeListener="#{cadastrarClienteAction.mudancaCampo}" />
+							<p:tooltip for="CNPJ" id="CNPJToolTip" position="top"
+								value="#{tooltips.nome('cadastrarCliente.CNPJ')}" />
+							<p:inputText converter="#{JsfNIFConverter}" id="NIFC"
+								maxlength="10"
+								placeholder="#{placeholder.nome(view.viewId.replace('.xhtml','').replace('/','').concat('_NIFC'))}"
+								rendered="#{!cadastrarClienteAction.entidade.inPf and configuracoesRequestAction.configuracoes().cdPais == 'AO'}"
+								size="10" styleClass="form-control"
+								value="#{cadastrarClienteAction.entidade.nrCnpj}"
+								valueChangeListener="#{cadastrarClienteAction.mudancaCampo}" />
+							<p:tooltip for="NIFC" id="NIFCToolTip" position="top"
+								value="#{tooltips.nome('cadastrarCliente.NIFC')}" />
+
+						</div>
+
+						<label class="col-md-1 control-label">Nome:<h:outputText
+								rendered="#{!cadastrarClienteAction.entidade.inPf}"
+								value=" Fantasia" />
+						</label>
+
+						<div class="col-md-2">
+							<p:inputText id="NomeCliente" label="Nome do Cliente"
+								placeholder="#{placeholder.nome(view.viewId.replace('.xhtml','').replace('/','').concat('_NomeCliente'))}"
+								size="19" styleClass="form-control"
+								value="#{cadastrarClienteAction.entidade.txNmCliente}"
+								valueChangeListener="#{cadastrarClienteAction.mudancaCampo}" />
+							<p:tooltip for="NomeCliente" id="NomeClienteToolTip"
+								position="top"
+								value="#{tooltips.nome('cadastrarCliente.NomeCliente')}" />
+						</div>
+
+						<h:panelGroup id="sexo"
+							rendered="#{cadastrarClienteAction.entidade.inPf}">
+							<label class="col-md-1 control-label">Sexo:</label>
+							<div class="col-md-2">
+								<p:selectOneMenu filter="true" id="sexoCliente"
+									styleClass="form-control"
+									value="#{cadastrarClienteAction.entidade.inSexoMasc}"
+									valueChangeListener="#{cadastrarClienteAction.mudancaCampo}">
+									<f:selectItem itemLabel="Masculino" itemValue="M" />
+									<f:selectItem itemLabel="Feminino" itemValue="F" />
+								</p:selectOneMenu>
+								<p:tooltip for="sexoCliente" id="sexoClienteToolTipId"
+									position="top" showDelay="1000"
+									value="#{tooltips.nome(view.viewId.replace('.xhtml','').replace('/','').concat('_sexoCliente'))}" />
+							</div>
+						</h:panelGroup>
+
+						<h:panelGroup id="razaoSocial"
+							rendered="#{!cadastrarClienteAction.entidade.inPf}">
+							<label class="col-md-1 control-label">Razão Social:</label>
+							<div class="col-md-2">
+								<p:inputText id="RazaoSocial" maxlength="100"
+									placeholder="#{placeholder.nome(view.viewId.replace('.xhtml','').replace('/','').concat('_RazaoSocial'))}"
+									size="50" styleClass="form-control"
+									value="#{cadastrarClienteAction.entidade.txNmRazaoSocial}"
+									valueChangeListener="#{cadastrarClienteAction.mudancaCampo}" />
+								<p:tooltip for="RazaoSocial" id="RazaoSocialToolTip"
+									position="top"
+									value="#{tooltips.nome('cadastrarCliente.RazaoSocial')}" />
+							</div>
+						</h:panelGroup>
+
+
+
+
+
+
+					</h:panelGroup>
+				</div>
+			
+			
+			</div>		
+		</h:panelGroup>	
+	</h:panelGroup>
+	</ui:composition>

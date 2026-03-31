@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ui:composition template="/templates/layout.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+<!-- http://localhost:8080/erp-management-system/pages/telaCadastroClientes.xhtml -->
+<ui:define name="conteudo">
+    <h:form>
+
+        <!-- HEADER -->
+        <h2>Cliente | Email | Nº: 0</h2>
+
+        <p:panel style="margin-top:20px;">
+
+            <h:panelGrid columns="2" cellpadding="10" style="width:100%;">
+
+                <!-- Tipo Pessoa -->
+                <h:outputLabel value="Tipo Pessoa:" />
+<!--                 <p:selectOneMenu style="width:100%"> -->
+<!--                     <f:selectItem itemLabel="PF" itemValue="PF"/> -->
+<!--                     <f:selectItem itemLabel="PJ" itemValue="PJ"/> -->
+<!--                 </p:selectOneMenu> -->
+
+                <!-- CPF/CNPJ -->
+                <h:outputLabel value="CPF/CNPJ:" />
+                <p:inputText style="width:100%" />
+
+                <!-- Nome -->
+                <h:outputLabel value="Nome:" />
+                <p:inputText style="width:100%" />
+
+                <!-- Sexo -->
+<!--                 <h:outputLabel value="Sexo:" /> -->
+<!--                 <p:selectOneMenu style="width:100%"> -->
+<!--                     <f:selectItem itemLabel="Masculino" itemValue="M"/> -->
+<!--                     <f:selectItem itemLabel="Feminino" itemValue="F"/> -->
+<!--                 </p:selectOneMenu> -->
+
+                <!-- Inscrição Estadual -->
+                <h:outputLabel value="Inscr. Est.:" />
+                <p:inputText style="width:100%" />
+
+                <!-- Isento -->
+                <h:outputLabel value="Isento:" />
+                <p:inputSwitch />
+
+                <!-- Inscrição Municipal -->
+                <h:outputLabel value="Inscr. Municipal:" />
+                <p:inputText style="width:100%" />
+
+                <!-- RG -->
+                <h:outputLabel value="RG:" />
+                <p:inputText style="width:100%" />
+
+                <!-- Email -->
+                <h:outputLabel value="E-mail:" />
+                <p:inputText style="width:100%" />
+
+                <!-- Email ativo -->
+                <h:outputLabel value="Ativo:" />
+                <p:inputSwitch />
+
+                <!-- Nascimento -->
+                <h:outputLabel value="Nascimento:" />
+                <p:datePicker pattern="dd/MM/yyyy" />
+
+                <!-- Como encontrou -->
+                <h:outputLabel value="Como encontrou:" />
+<!--                 <p:selectOneMenu style="width:100%"> -->
+<!--                     <f:selectItem itemLabel="Selecione..." /> -->
+<!--                     <f:selectItem itemLabel="Google" itemValue="1"/> -->
+<!--                     <f:selectItem itemLabel="Indicação" itemValue="2"/> -->
+<!--                 </p:selectOneMenu> -->
+
+            </h:panelGrid>
+
+            <p:commandButton value="Salvar" style="margin-top:20px;" />
+
+        </p:panel>
+
+    </h:form>
+
+</ui:define>
+</ui:composition>
