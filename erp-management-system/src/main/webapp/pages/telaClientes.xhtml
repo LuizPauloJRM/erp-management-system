@@ -1,9 +1,171 @@
-<ui:composition template="/templates/layout.xhtml"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-    <ui:define name="content">
-        <h1>Clientes</h1>
-    </ui:define>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="formServico">
+
+
+        <p:tabView dynamic="true" cache="false">
+
+            <!--CADASTRO -->
+            <p:tab title="Cadastro de Serviço">
+
+                <p:panel header="Dados do Serviço" styleClass="card">
+
+                    <p:messages id="messages" showDetail="true" closable="true"/>
+
+                    <p:panelGrid columns="4" layout="grid" styleClass="ui-fluid">
+
+                        <!-- Nome -->
+                        <p:outputLabel for="nome" value="Nome"/>
+                        <p:inputText id="nome"
+                                     value="#{servicoBean.servico.nome}"
+                                     required="true"/>
+
+                        <!-- Status -->
+                        <p:outputLabel for="status" value="Status"/>
+                        <p:selectOneMenu id="status"
+                                         value="#{servicoBean.servico.status}">
+                            <f:selectItem itemLabel="Selecione" itemValue=""/>
+                            <f:selectItem itemLabel="Ativo" itemValue="ATIVO"/>
+                            <f:selectItem itemLabel="Finalizado" itemValue="FINALIZADO"/>
+                            <f:selectItem itemLabel="Cancelado" itemValue="CANCELADO"/>
+                        </p:selectOneMenu>
+
+                        <!-- Valor -->
+                        <p:outputLabel for="valor" value="Valor"/>
+                        <p:inputNumber id="valor"
+                                       value="#{servicoBean.servico.valor}"
+                                       symbol="R$"
+                                       decimalPlaces="2"/>
+
+                        <!-- Data -->
+                        <p:outputLabel for="data" value="Data"/>
+                        <p:datePicker id="data"
+                                      value="#{servicoBean.servico.dataServico}"
+                                      pattern="dd/MM/yyyy"/>
+
+                        <!-- Descrição -->
+                        <p:outputLabel for="descricao" value="Descrição"/>
+                        <p:inputTextarea id="descricao"
+                                         value="#{servicoBean.servico.descricao}"
+                                         rows="3"
+                                         cols="50"/>
+
+                    </p:panelGrid>
+
+                    <p:separator/>
+
+                    <p:commandButton value="Salvar"
+                                     icon="pi pi-save"
+                                     action="#{servicoBean.salvar}"
+                                     update="formServico messages"
+                                     styleClass="ui-button-success"/>
+
+                    <p:commandButton value="Novo"
+                                     icon="pi pi-plus"
+                                     action="#{servicoBean.novo}"
+                                     process="@this"
+                                     update="formServico"
+                                     styleClass="ui-button-secondary"/>
+
+                </p:panel>
+
+            </p:tab>
+
+            <!-- LISTAGEM-->
+            <p:tab title="Consulta de Serviços">
+
+                <p:panel header="Filtros" styleClass="card">
+
+                    <p:panelGrid columns="4" layout="grid" styleClass="ui-fluid">
+
+                        <!-- Filtro Nome -->
+                        <p:outputLabel value="Nome"/>
+                        <p:inputText value="#{servicoBean.filtroNome}"/>
+
+                        <!-- Filtro Status -->
+                        <p:outputLabel value="Status"/>
+                        <p:selectOneMenu value="#{servicoBean.filtroStatus}">
+                            <f:selectItem itemLabel="Todos" itemValue=""/>
+                            <f:selectItem itemLabel="Ativo" itemValue="ATIVO"/>
+                            <f:selectItem itemLabel="Finalizado" itemValue="FINALIZADO"/>
+                            <f:selectItem itemLabel="Cancelado" itemValue="CANCELADO"/>
+                        </p:selectOneMenu>
+
+                    </p:panelGrid>
+
+                    <p:commandButton value="Buscar"
+                                     icon="pi pi-search"
+                                     action="#{servicoBean.buscar}"
+                                     update="tabelaServico"
+                                     styleClass="ui-button-primary"/>
+
+                </p:panel>
+
+                <!-- TABELA -->
+                <p:panel header="Lista de Serviços" styleClass="card">
+
+                    <p:dataTable id="tabelaServico"
+                                 value="#{servicoBean.listaServicos}"
+                                 var="servico"
+                                 paginator="true"
+                                 rows="10"
+                                 responsiveLayout="scroll">
+
+                        <p:column headerText="ID">
+                            <h:outputText value="#{servico.id}"/>
+                        </p:column>
+
+                        <p:column headerText="Nome">
+                            <h:outputText value="#{servico.nome}"/>
+                        </p:column>
+
+                        <p:column headerText="Valor">
+                            <h:outputText value="#{servico.valor}">
+                                <f:convertNumber type="currency" currencySymbol="R$"/>
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column headerText="Data">
+                            <h:outputText value="#{servico.dataServico}">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column headerText="Status">
+                            <h:outputText value="#{servico.status}"/>
+                        </p:column>
+
+                        <p:column headerText="Ações" style="width:120px">
+
+                            <p:commandButton icon="pi pi-pencil"
+                                             title="Editar"
+                                             action="#{servicoBean.editar(servico)}"
+                                             update="formServico"
+                                             styleClass="ui-button-warning"/>
+
+                            <p:commandButton icon="pi pi-trash"
+                                             title="Excluir"
+                                             action="#{servicoBean.excluir(servico)}"
+                                             update="tabelaServico messages"
+                                             styleClass="ui-button-danger"/>
+
+                        </p:column>
+
+                    </p:dataTable>
+
+                </p:panel>
+
+            </p:tab>
+
+        </p:tabView>
+
+    </h:form>
 
 </ui:composition>
+
