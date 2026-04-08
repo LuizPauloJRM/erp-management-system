@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>ERP - Empresas</title>
+</h:head>
+
+<h:body>
+<!-- http://localhost:8080/erp-management-system/pages/telaCadastroEmpresas.xhtml -->
+<h:form>
+
+    <!--HEADER -->
+    <h:panelGroup layout="block" style="margin-bottom:20px;">
+        <h1>Sistema ERP - Cadastro de Empresas</h1>
+    </h:panelGroup>
+
+
+    <!--BOTÃO AÇÕES-->
+    <h:panelGroup layout="block" style="margin-bottom:15px;">
+
+        <p:commandButton value="Nova Empresa"
+                         icon="pi pi-plus"
+                         onclick="PF('modalEmpresa').show(); return false;" />
+
+    </h:panelGroup>
+
+
+    <!--TABLE-->
+    <h:panelGroup layout="block">
+
+        <!-- Renderização condicional -->
+        <h:panelGroup rendered="#{not empty empresaBean.empresas}">
+
+            <p:dataTable var="e"
+                         value="#{empresaBean.empresas}"
+                         paginator="true"
+                         rows="10"
+                         style="margin-top:10px">
+
+                <p:column headerText="ID">
+                    <h:outputText value="#{e.id}" />
+                </p:column>
+
+                <p:column headerText="Nome">
+                    <h:outputText value="#{e.nome}" />
+                </p:column>
+
+                <p:column headerText="CNPJ">
+                    <h:outputText value="#{e.cnpj}" />
+                </p:column>
+
+                <p:column headerText="Telefone">
+                    <h:outputText value="#{e.telefone}" />
+                </p:column>
+
+                <p:column headerText="Email">
+                    <h:outputText value="#{e.email}" />
+                </p:column>
+
+                <p:column headerText="Ações">
+
+                    <p:commandButton icon="pi pi-pencil"
+                                     title="Editar"
+                                     action="#{empresaBean.editar(e)}"
+                                     onclick="PF('modalEmpresa').show(); return false;" />
+
+                    <p:commandButton icon="pi pi-trash"
+                                     title="Excluir"
+                                     action="#{empresaBean.remover(e)}"
+                                     update="@form" />
+
+                </p:column>
+
+            </p:dataTable>
+
+        </h:panelGroup>
+
+
+        <!-- Mensagem quando não tem dados -->
+        <h:panelGroup rendered="#{empty empresaBean.empresas}">
+            <h:outputText value="Nenhuma empresa cadastrada."
+                          style="color:gray; font-style:italic;" />
+        </h:panelGroup>
+
+    </h:panelGroup>
+
+
+    <!-- MODAL -->
+    <p:dialog header="Cadastrar Empresa"
+              widgetVar="modalEmpresa"
+              modal="true"
+              width="450">
+
+        <h:panelGrid columns="2" cellpadding="5">
+
+            <h:outputLabel value="Nome:"/>
+            <p:inputText value="#{empresaBean.empresa.nome}" required="true"/>
+
+            <h:outputLabel value="CNPJ:"/>
+            <p:inputMask value="#{empresaBean.empresa.cnpj}"
+                         mask="99.999.999/9999-99"
+                         required="true"/>
+
+            <h:outputLabel value="Telefone:"/>
+            <p:inputMask value="#{empresaBean.empresa.telefone}"
+                         mask="(99) 99999-9999"/>
+
+            <h:outputLabel value="Email:"/>
+            <p:inputText value="#{empresaBean.empresa.email}"/>
+
+        </h:panelGrid>
+
+        <p:separator/>
+
+        <p:commandButton value="Salvar"
+                         action="#{empresaBean.salvar}"
+                         update="@form"
+                         oncomplete="PF('modalEmpresa').hide();" />
+
+        <p:commandButton value="Cancelar"
+                         onclick="PF('modalEmpresa').hide(); return false;" />
+
+    </p:dialog>
+
+</h:form>
+
+</h:body>
+</html>
