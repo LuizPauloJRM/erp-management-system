@@ -24,6 +24,11 @@ public class Empresa implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	
+	//Enum 
+	@Enumerated(EnumType.STRING)
+	private TipoEmpresa tipo;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -44,15 +49,7 @@ public class Empresa implements Serializable {
 	//Muitas empresas para um serviço
 	@ManyToOne
 	@JoinColumn(name = "servicos_id")
-	private Servico servicos;
-
-	//Mapeando o ENUM 
-	@Enumerated(EnumType.STRING)
-	@Column(nullable = false , length = 30)
-	private TipoEmpresa tipo;
-	
-	
-	
+	private Servico servicos;	
 	
 	
 	public Long getId() {
