@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 
 import com.luiz.erp.model.Empresa;
 import com.luiz.erp.model.Servico;
+import com.luiz.erp.model.TipoEmpresa;
 //Classe teste de pesquisa 
 public class CamadaPersistencia {
 	
@@ -39,7 +40,7 @@ public class CamadaPersistencia {
 		empresa.setNomeFantasia("João da Silva");
 		empresa.setCnpj("41.952.519/0001-57");
 		empresa.setRazaoSocial("Luiz Paulo 41952519000157");
-//		empresa.setTipoEmpresa(TipoEmpresa.MEI);
+		empresa.setTipo(TipoEmpresa.MEI);
 		empresa.setDataFundacao(new Date());
 		empresa.setServicos(listaDeServicos.get(0));
 		

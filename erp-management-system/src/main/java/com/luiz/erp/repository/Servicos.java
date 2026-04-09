@@ -27,7 +27,7 @@ public class Servicos implements Serializable{
 	}
 	
 	public List<Servico> pesquisar (String descricao){
-		//Classe Util que são usadas 
+		//Classe Util que são usadas pequenas tarefas de Query
 		CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
 		
 		

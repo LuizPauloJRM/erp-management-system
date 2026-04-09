@@ -12,6 +12,8 @@ public class Empresas implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
+	
+	//Buscar , guardar remover operações para o banco de dados 
 	private EntityManager manager;
 	
 	public Empresas() {
@@ -22,7 +24,7 @@ public class Empresas implements Serializable {
 		this.manager = manager;
 	}
 	
-	//Buscar por id 
+	//Buscar por id usando find 
 	public Empresa  porId(Long id) {
 		return manager.find(Empresa.class,id );
 	}
@@ -30,7 +32,7 @@ public class Empresas implements Serializable {
 	//Pesquisa por empresa por nome, lista de empresa ,query
 	//Consulta de String passada por parametro 
 	public List<Empresa> pesquisar(String nome) {
-		String jpql="from Empresa where nomeFantasia like :nomeFantasia";
+		String jpql="from Empresa where nomeFantasia like : nomeFantasia";
 		
 		TypedQuery<Empresa> query = manager.createQuery(jpql, Empresa.class);
 		query.setParameter("nomeFantasia", nome +"%");

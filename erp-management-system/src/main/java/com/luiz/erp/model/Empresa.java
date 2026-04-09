@@ -101,6 +101,15 @@ public class Empresa implements Serializable {
 	public void setServicos(Servico servicos) {
 		this.servicos = servicos;
 	}
+	
+
+	public TipoEmpresa getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoEmpresa tipo) {
+		this.tipo = tipo;
+	}
 
 	@Override
 	public int hashCode() {
