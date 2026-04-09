@@ -13,14 +13,21 @@
 
 
 	<!-- MENU LATERAL -->
-	<div class="layout">
-		<ui:include src="/componentes/menu.xhtml" />
+	<h:body>
+    <div style="display: flex; min-height: 100vh;">
+        
+        <!-- COLUNA DO MENU (SIDEBAR) -->
+        <div style="width: 200px; background-color: #2c3e50; color: white;">
+            <ui:include src="/componentes/menu.xhtml" />
+        </div>
 
-		<div class="content">
-			<ui:insert name="content" />
-			<ui:insert name="conteudo"/>
-		</div>
-	</div>
+        <!-- COLUNA DO CONTEÚDO -->
+        <div style="flex-grow: 1; padding: 20px; background-color: #f4f4f4;">
+            <ui:insert name="content" />
+        </div>
+        
+    </div>
+</h:body>
 
 </h:body>
 </html>

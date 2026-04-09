@@ -6,81 +6,65 @@
     xmlns:p="http://primefaces.org/ui">
 
 <!-- http://localhost:8080/erp-management-system/pages/telaCadastroClientes.xhtml -->
-<ui:define name="conteudo">
-    <h:form>
+<ui:define name="content">
+    <h:form id="formCadastro">
+        <!-- HEADER ESTILIZADO -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2 style="margin: 0;">Cadastro de Cliente <small style="color: #666;">| Nº: 0</small></h2>
+            <p:commandButton value="Salvar" icon="pi pi-save" styleClass="ui-button-success" />
+        </div>
 
-        <!-- HEADER -->
-        <h2>Cliente | Email | Nº: 0</h2>
+        <p:panel header="Dados Pessoais / Empresariais">
+            <div class="ui-fluid">
+                <!-- LINHA 1: Nome e CPF/CNPJ -->
+                <p:panelGrid columns="4" layout="grid" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4" styleClass="ui-panelgrid-blank">
+                    
+                    <p:outputLabel value="Nome:" />
+                    <p:inputText placeholder="Nome completo ou Razão Social" />
 
-        <p:panel style="margin-top:20px;">
+                    <p:outputLabel value="CPF/CNPJ:" />
+                    <p:inputText placeholder="000.000.000-00" />
+                </p:panelGrid>
 
-            <h:panelGrid columns="2" cellpadding="10" style="width:100%;">
+                <!-- LINHA 2: Inscrições e RG -->
+                <p:panelGrid columns="4" layout="grid" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4" styleClass="ui-panelgrid-blank">
+                    
+                    <p:outputLabel value="RG / Inscr. Est.:" />
+                    <p:inputText />
 
-                <!-- Tipo Pessoa -->
-                <h:outputLabel value="Tipo Pessoa:" />
-<!--                 <p:selectOneMenu style="width:100%"> -->
-<!--                     <f:selectItem itemLabel="PF" itemValue="PF"/> -->
-<!--                     <f:selectItem itemLabel="PJ" itemValue="PJ"/> -->
-<!--                 </p:selectOneMenu> -->
+                    <p:outputLabel value="Inscr. Municipal:" />
+                    <p:inputText />
+                </p:panelGrid>
 
-                <!-- CPF/CNPJ -->
-                <h:outputLabel value="CPF/CNPJ:" />
-                <p:inputText style="width:100%" />
+                <!-- LINHA 3: E-mail e Nascimento -->
+                <p:panelGrid columns="4" layout="grid" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4" styleClass="ui-panelgrid-blank">
+                    
+                    <p:outputLabel value="E-mail:" />
+                    <p:inputText placeholder="exemplo@email.com" />
 
-                <!-- Nome -->
-                <h:outputLabel value="Nome:" />
-                <p:inputText style="width:100%" />
+                    <p:outputLabel value="Nascimento:" />
+                    <p:datePicker pattern="dd/MM/yyyy" showIcon="true" />
+                </p:panelGrid>
 
-                <!-- Sexo -->
-<!--                 <h:outputLabel value="Sexo:" /> -->
-<!--                 <p:selectOneMenu style="width:100%"> -->
-<!--                     <f:selectItem itemLabel="Masculino" itemValue="M"/> -->
-<!--                     <f:selectItem itemLabel="Feminino" itemValue="F"/> -->
-<!--                 </p:selectOneMenu> -->
+                <!-- LINHA 4: Switches (Isento/Ativo) -->
+                <p:panelGrid columns="4" layout="grid" columnClasses="ui-grid-col-2,ui-grid-col-2,ui-grid-col-2,ui-grid-col-2" styleClass="ui-panelgrid-blank">
+                    
+                    <p:outputLabel value="Isento:" />
+                    <p:inputSwitch />
 
-                <!-- Inscrição Estadual -->
-                <h:outputLabel value="Inscr. Est.:" />
-                <p:inputText style="width:100%" />
-
-                <!-- Isento -->
-                <h:outputLabel value="Isento:" />
-                <p:inputSwitch />
-
-                <!-- Inscrição Municipal -->
-                <h:outputLabel value="Inscr. Municipal:" />
-                <p:inputText style="width:100%" />
-
-                <!-- RG -->
-                <h:outputLabel value="RG:" />
-                <p:inputText style="width:100%" />
-
-                <!-- Email -->
-                <h:outputLabel value="E-mail:" />
-                <p:inputText style="width:100%" />
-
-                <!-- Email ativo -->
-                <h:outputLabel value="Ativo:" />
-                <p:inputSwitch />
-
-                <!-- Nascimento -->
-                <h:outputLabel value="Nascimento:" />
-                <p:datePicker pattern="dd/MM/yyyy" />
-
-                <!-- Como encontrou -->
-                <h:outputLabel value="Como encontrou:" />
-<!--                 <p:selectOneMenu style="width:100%"> -->
-<!--                     <f:selectItem itemLabel="Selecione..." /> -->
-<!--                     <f:selectItem itemLabel="Google" itemValue="1"/> -->
-<!--                     <f:selectItem itemLabel="Indicação" itemValue="2"/> -->
-<!--                 </p:selectOneMenu> -->
-
-            </h:panelGrid>
-
-            <p:commandButton value="Salvar" style="margin-top:20px;" />
-
+                    <p:outputLabel value="Ativo:" />
+                    <p:inputSwitch />
+                </p:panelGrid>
+            </div>
         </p:panel>
 
+        <!-- BOTÕES DE AÇÃO NO RODAPÉ -->
+        <div style="margin-top: 20px;">
+            <p:commandButton value="Salvar Cliente" icon="pi pi-check" style="width: auto; padding: 5px 20px;" />
+            <p:spacer width="10" />
+            <p:commandButton value="Cancelar" icon="pi pi-times" styleClass="ui-button-secondary" style="width: auto;" />
+        </div>
     </h:form>
-
 </ui:define>
+
 </ui:composition>

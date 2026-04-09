@@ -4,22 +4,31 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 	<div class="sidebar">
+		 <h2 style="color: white; font-size: 1.2em; text-align: center;">ERP</h2>
 
-		<h2 style="color: white;">ERP Management System</h2>
+		<h:form>
+			<p:panelMenu style="width: 100%;">
 
-		<p:menu style="width: 100%;">
+				<p:submenu label="Operacional" expanded="true">
+					<p:menuitem value="Dashboard" icon="pi pi-home"
+						outcome="/pages/dashboard" />
 
-			<p:menuitem value="Dashboard" icon="pi pi-home"
-				outcome="/pages/dashboard" />
+					<p:menuitem value="Cadastro Clientes" icon="pi pi-users"
+						outcome="/pages/telaCadastroClientes" />
 
-			<p:menuitem value="Clientes" icon="pi pi-users"
-				outcome="/pages/telaCadastroClientes" />
+					<p:menuitem value="Produtos" icon="pi pi-box"
+						outcome="/pages/telaProdutos" />
+				</p:submenu>
 
-			<p:menuitem value="Produtos" icon="pi pi-box"
-				outcome="/pages/telaProdutos" />
+				<!-- RH -->
+				<p:submenu label="RH" icon="pi pi-briefcase">
+					<p:menuitem value="Aniversariantes" icon="pi pi-calendar"
+						outcome="/pages/telaRelatorioAniversariantes" />
+					<p:menuitem value="Configurações RH" icon="pi pi-cog" />
+				</p:submenu>
 
-		</p:menu>
-
+			</p:panelMenu>
+		</h:form>
 	</div>
 
 </ui:composition>

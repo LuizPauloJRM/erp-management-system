@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD MathML 3.0//EN" "http://www.w3.org/Math/DTD/mathml3/mathml3.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/layout.xhtml">
+	<ui:define name="content">
+
+		<h:form prependId="false">
+			<!-- Row Start -->
+			
+			<!-- PAINEL -->
+			<h:panelGroup class="row" id="relatorioDocsEmp" layout="block">
+				<div class="col-md-12">
+					<div class="panel panel-color panel-corLaranja">
+						<div class="panel-heading">
+							<h3 class="panel-title">Relatório de Aniversariantes do mês</h3>
+							<div class="panel-options">
+								<a data-toggle="panel" href="#"> <span class="collapse-icon"><i
+										class="fas fa-minus" /></span> <span class="expand-icon"><i
+										class="fas fa-plus" /></span>
+								</a>
+							</div>
+						</div>
+						
+						<div class="panel-body">
+							<div class="form-horizontal">
+								<div class="col-md-12">
+								
+									<div class="form-group form-group-sm">
+										<!-- BUSCAR POR MES -->
+											<label class="col-md-1 control-label">Mês :</label>
+											<div class="col-md-3">
+												<p:datePicker
+													value="#{relatorioPontualidadeAction.filtroPontulidade.dtPesquisa}"
+													view="month" pattern="MM/yyyy" yearNavigator="true"
+													yearRange="2017:2025" />
+											</div>											
+									</div>
+									
+<!-- 									<div class="form-group form-group-sm"> -->
+<!-- 										<label class="col-md-2 control-label">Funcionário: </label> -->
+<!-- 										<div class="col-md-2"> -->
+<!-- 											<p:selectOneMenu autoWidth="false" filter="true" -->
+<!-- 												filterMatchMode="contains" style="width:100%" -->
+<!-- 												value="#{relatorioDocumentosEmpregadoAction.entidadeFiltro.empregado.cdEmpregado}"> -->
+<!-- 												<f:selectItem itemValue="0" itemLabel="Todos" /> -->
+<!-- 												<f:selectItems value="#{comboAction.empregado}" /> -->
+<!-- 											</p:selectOneMenu> -->
+<!-- 										</div>																	 -->
+<!-- 									</div> -->
+											
+											
+									<!-- BOTÃO BUSCAR  -->							
+									<div class="form-group form-group-sm">
+										<div class="col-md-12">
+											<p:commandButton id="Buscar" onclick="mostraDiv()"
+												style="width:100%;" oncomplete="escondeDiv()"
+												update="listaDocumentos, messages" value="Buscar" />
+										</div>
+									</div>									
+								</div>														
+							</div>
+							<!-- SEPARADOR -->
+							<hr />
+							
+							<!-- Mostrar Aniversariantes do mes  -->
+							<!-- TABELA -->
+							<div class="form-horizontal">
+								<div class="col-md-12">
+									<p:dataTable align="right" id="listaDocumentos" rows="10"
+										emptyMessage="Nenhum registro cadastrado." paginator="true"
+										paginatorPosition="both" style="width: 100%;"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} &nbsp;&nbsp; Mostrar {RowsPerPageDropdown} linhas por página"
+										currentPageReportTemplate="[ Registros: {startRecord} a {endRecord} no total de {totalRecords}	| Página: {currentPage} de {totalPages} ]"
+										rowsPerPageTemplate="10, 15, 30, 50, 100, 500"
+										value="#{relatorioDocumentosEmpregadoAction.listaEntidadeLazy}"
+										var="lista">
+										
+										
+										<p:column sortBy="#{lista.ano}" sortable="true">
+											<f:facet name="header">Data de Nascimento</f:facet>
+											<h:outputText value="#{lista.dtVencimento}"
+												converter="#{JsfDataConverter}" />
+										</p:column>
+										
+										<p:column sortBy="#{lista.ano}" sortable="true">
+											<f:facet name="header">Funcionário</f:facet>
+											<h:outputText value="#{lista.nmEmpregado}" />
+										</p:column>
+																										
+									</p:dataTable>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</h:panelGroup>
+			
+		</h:form>
+	</ui:define>
+</ui:composition>
