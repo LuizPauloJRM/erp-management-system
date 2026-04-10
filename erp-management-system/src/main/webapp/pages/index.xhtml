@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ui:composition template="/templates/layout.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+<!-- http://localhost:8080/erp-management-system/pages/telaCadastroClientes.xhtml -->
+<ui:define name="content">
+	<!-- Acessando o nome e colocando na tela com EL  -->
+	<!-- Ler e escrever atributos -->
+  <h:outputLabel value="#{funcionarioRegistrarBean.nmEmpregado}"/>
+  
+   <h:outputLabel value="#{funcionarioRegistrarBean.sobrenome}"/>
+   
+</ui:define>
+
+</ui:composition>
